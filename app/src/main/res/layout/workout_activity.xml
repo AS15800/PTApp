@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/workout_gradient">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Workout"
-        android:id="@+id/actionBar"
-        android:gravity="center"
-        android:background="#1AFFFFFF"
-        android:textSize="22sp"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
-        android:layout_below="@id/actionBar"
         android:id="@+id/DaySelector">
 
         <TextView
@@ -27,42 +17,49 @@
             android:layout_height="match_parent"
             android:background="#000000"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             />
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="#FFFFFF"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             />
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="#000000"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             />
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="#FFFFFF"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             />
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="#000000"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             />
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="#FFFFFF"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             />
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="#000000"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             />
 
     </LinearLayout>
@@ -74,40 +71,13 @@
         android:id="@+id/workout_recyclerView"
         android:layout_below="@+id/DaySelector"
         android:layout_above="@+id/startWorkoutBtn"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginBottom="10dp"/>
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
         android:id="@+id/startWorkoutBtn"
-        android:layout_above="@+id/navBar"
-        android:text="Start Workout"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/navBar"
-        android:orientation="horizontal">
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Workout"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Messaging"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Profile"
-            android:layout_weight="1"/>
-
-
-
-    </LinearLayout>
+        android:text="Start Workout"
+        style="@style/workoutBtn"
+        android:textColor="#FFFFFF"
+        android:layout_height="60dp"/>
 
 </RelativeLayout>

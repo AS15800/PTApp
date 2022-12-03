@@ -59,7 +59,7 @@
 
 
     <Button
-        android:id="@+id/toCreateAccountBtn"
+        android:id="@+id/loginToRegister"
         style="@style/register_login_Btn"
         android:text="@string/createAccBtn"
         />

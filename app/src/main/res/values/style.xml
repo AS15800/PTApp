@@ -17,9 +17,32 @@
     <!-- Login & Register button styles -->
     <style name="register_login_Btn">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_height">80dp</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:backgroundTint">@color/register_login_btn</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="cornerRadius">0dp</item>
+        <item name="backgroundTint">@null</item>
+    </style>
+
+    <!-- Navigation bar -->
+    <style name="navigationBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">#FFFFFF</item>
+        <item name="menu">@menu/bottom_nav</item>
+        <item name="itemTextColor">#000000</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="android:layout_marginBottom">15dp</item>
+    </style>
+
+    <style name="workoutBtn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:backgroundTint">@color/register_2</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="cornerRadius">0dp</item>
