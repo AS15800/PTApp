@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Android colours -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Text colour -->
+    <color name="textColour">#FFFFFF</color>
+    <color name="input_underline">#DAA033</color>
+
+    <!-- Button colours -->
+    <color name="createAccBtn">#1AFFFFFF</color>
+    <color name="register_login_btn">#956D21</color>
+
+    <!-- Background colours -->
+    <color name="register_1">#101511</color>
+    <color name="register_2">#4B6F67</color>
+
+    <color name="login_1">#121015</color>
+    <color name="login_2">#6F4B4B</color>
+
+    <color name="workout_1">#111015</color>
+    <color name="workout_2">#4B5D6F</color>
+</resources>

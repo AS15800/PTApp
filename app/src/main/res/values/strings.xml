@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PTApp</string>
+
+    <!-- Register screen -->
+    <string name="name_input">Full name</string>
+    <string name="email_input">Email</string>
+    <string name="password_input">Password</string>
+    <string name="createAccBtn">Create Account</string>
+    <string name="loginBtn">Login</string>
+</resources>
