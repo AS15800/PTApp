@@ -5,16 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.ViewFlipper
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
+
+    private val workoutInfo = workoutInformationArray()
+
     private lateinit var viewFlipper: ViewFlipper
 
     private val itemList = ArrayList<ArrayList<String>>()
@@ -68,24 +68,28 @@ class MainActivity : AppCompatActivity() {
     private fun prepareItems(){
 
         val recyclerView: RecyclerView = findViewById(R.id.workout_recyclerView)
-        workoutAdapter = WorkoutAdapter(itemList)
-        val layoutManager = LinearLayoutManager(applicationContext)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = workoutAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val workoutInfo = arrayListOf(
-            arrayListOf("Pushup", "Sets: 5", "Reps: 10"),
-            arrayListOf("Situp", "Sets: 4", "Reps: 20"),
-            arrayListOf("Squat", "Sets: 6", "Reps: 15"),
-            arrayListOf("Calf raise", "Sets: 10", "Reps: 3"),
-            arrayListOf("Pushup", "Sets: 5", "Reps: 10"),
-            arrayListOf("Situp", "Sets: 4", "Reps: 20"),
-            arrayListOf("Squat", "Sets: 6", "Reps: 15"),
-            arrayListOf("Calf raise", "Sets: 10", "Reps: 3")
-        )
+        val data = ArrayList<WorkoutItems>()
 
-        for (i in 0 until workoutInfo.size){
-            itemList.add(workoutInfo[i])
+        for(x in 0 until workoutInfo.workoutInfo.size){
+            data.add(WorkoutItems(workoutInfo.workoutInfo[x][0], workoutInfo.workoutInfo[x][1], workoutInfo.workoutInfo[x][2]))
         }
+
+        val adapter = WorkoutAdapter(data)
+
+        recyclerView.adapter = adapter
+
+        adapter.setOnItemClickListener(object : WorkoutAdapter.OnItemClickListerner {
+            override fun onItemClick(position: Int){
+
+                Toast.makeText(this@MainActivity,
+                    workoutInfo.workoutInfo[position][0] + "\n" +
+                        workoutInfo.workoutInfo[position][1] + "\n" +
+                        workoutInfo.workoutInfo[position][2] + "\n",
+                    Toast.LENGTH_SHORT).show()
+            }
+        })
+
     }
 }
