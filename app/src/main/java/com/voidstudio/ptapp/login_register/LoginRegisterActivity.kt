@@ -52,6 +52,79 @@ class LoginRegisterActivity : AppCompatActivity() {
         }
     }
 
+    /*
+    TODO: Registering
+    New user register and writes their name on Firestore and authentication
+    Creates a "profile" with all the information:
+    - User1
+        - User Information
+            - Name
+                - First: Adesh
+                - Last: Sookdewo
+            - Email: adesh5800@hotmail.co.uk
+            - Status: Activated
+            - Date
+                - Joined: 22/11/2022
+                - Expire: 26/12/2022
+
+        - Workout
+            - Current
+                - Monday
+                    - Exercise 1
+                        - Exercise name: Pushup
+                        - Sets: 5
+                        - Reps: 10
+                        - Between set cooldown: 50
+                    - Exercise 2
+                        - Exercise name: Situp
+                        - Sets: 5
+                        - Reps: 10
+                        - Between set cooldown: 50
+                - Tuesday
+                    - Exercise 1
+                        - Exercise name: Pushup
+                        - Sets: 5
+                        - Reps: 10
+                        - Between set cooldown: 50
+                    - Exercise 2
+                        - Exercise name: Situp
+                        - Sets: 5
+                        - Reps: 10
+                        - Between set cooldown: 50
+            - Next
+                - Monday
+                    - Exercise 1
+                        - Exercise name: Pushup
+                        - Sets: 5
+                        - Reps: 10
+                        - Between set cooldown: 50
+                    - Exercise 2
+                        - Exercise name: Situp
+                        - Sets: 5
+                        - Reps: 10
+                        - Between set cooldown: 50
+                - Tuesday
+                    - Exercise 1
+                        - Exercise name: Pushup
+                        - Sets: 5
+                        - Reps: 10
+                        - Between set cooldown: 50
+                    - Exercise 2
+                        - Exercise name: Situp
+                        - Sets: 5
+                        - Reps: 10
+                        - Between set cooldown: 50
+
+        - Milestones
+            - Workout
+                - Date: 22/11/2022
+                - Pushup: 20
+                - Situp: 8
+                - Squat: 12
+                - Calf raise: 15
+
+     */
+
     private fun loginBtnClicked(){
         val intent = Intent(applicationContext, MainActivity::class.java)
         startActivity(intent)
