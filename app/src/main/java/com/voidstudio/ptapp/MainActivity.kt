@@ -64,6 +64,10 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
+    /*
+    TODO: Get workout information
+    Get all workout information and store in data structure - Multi-dimensional arrayList
+     */
 
     private fun prepareItems(){
 
@@ -92,4 +96,9 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
+
+    /*
+    TODO: Profile
+    Get all user information in multi-dimension array
+     */
 }

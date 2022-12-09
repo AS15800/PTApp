@@ -122,15 +122,21 @@ class LoginRegisterActivity : AppCompatActivity() {
                 - Situp: 8
                 - Squat: 12
                 - Calf raise: 15
-
      */
 
-    private fun loginBtnClicked(){
+    private fun registerBtnClicked(){
         val intent = Intent(applicationContext, MainActivity::class.java)
         startActivity(intent)
     }
 
-    private fun registerBtnClicked(){
+    /*
+    TODO: Login
+    Check the logging details and login the user
+    The application keep login information SaveSharedPreference
+    Allow user to use biometric to log in
+     */
+
+    private fun loginBtnClicked(){
         val intent = Intent(applicationContext, MainActivity::class.java)
         startActivity(intent)
     }
