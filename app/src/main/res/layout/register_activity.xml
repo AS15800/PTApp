@@ -11,8 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="60dp">
+        android:gravity="center_horizontal">
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,6 +50,13 @@
             android:hint="@string/password_input"
             android:autofillHints="Password"/>
 
+        <EditText
+            android:id="@+id/confirmPassword_input"
+            style="@style/register_input"
+            android:inputType="textPassword"
+            android:hint="@string/confirmPassword_input"
+            android:autofillHints="Password"/>
+
         <Button
             android:id="@+id/createAccountBtn"
             app:backgroundTint="@null"
@@ -63,6 +69,16 @@
             android:layout_marginEnd="50dp"
             android:layout_marginTop="50dp"
             android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:id="@+id/loginText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logging"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

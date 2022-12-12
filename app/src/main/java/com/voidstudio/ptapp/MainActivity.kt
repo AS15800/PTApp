@@ -1,24 +1,18 @@
 package com.voidstudio.ptapp
 
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
 
     private val workoutInfo = workoutInformationArray()
 
     private lateinit var viewFlipper: ViewFlipper
-
-    private val itemList = ArrayList<ArrayList<String>>()
-    private lateinit var workoutAdapter: WorkoutAdapter
 
     private lateinit var email: EditText
 

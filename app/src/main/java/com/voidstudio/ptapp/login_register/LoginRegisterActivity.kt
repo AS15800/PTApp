@@ -2,10 +2,18 @@ package com.voidstudio.ptapp.login_register
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import android.widget.ViewFlipper
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.voidstudio.ptapp.MainActivity
 import com.voidstudio.ptapp.R
 
@@ -14,6 +22,16 @@ class LoginRegisterActivity : AppCompatActivity() {
 
     private lateinit var viewFlipper: ViewFlipper
 
+    private lateinit var fullNameInput: EditText
+    private lateinit var emailAddressInput: EditText
+    private lateinit var passwordInput: EditText
+    private lateinit var confirmPasswordInput: EditText
+
+    private lateinit var loginText: TextView
+
+    // Create Firebase Authentication object
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_register_viewflipper)
@@ -21,8 +39,16 @@ class LoginRegisterActivity : AppCompatActivity() {
         // Making the screen full and making the status bar transparent
         window.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
+        fullNameInput = findViewById(R.id.fullName_input)
+        emailAddressInput = findViewById(R.id.email_input)
+        passwordInput = findViewById(R.id.password_input)
+        confirmPasswordInput = findViewById(R.id.confirmPassword_input)
+
+        loginText = findViewById(R.id.loginText)
+
+        auth = Firebase.auth
         // Finding the viewFlipper
         viewFlipper = findViewById(R.id.viewFlipper)
 
@@ -50,6 +76,10 @@ class LoginRegisterActivity : AppCompatActivity() {
         goToLoginScreen.setOnClickListener {
             viewFlipper.displayedChild = 0
         }
+    }
+
+    private fun toastMsg(message: String){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     /*
@@ -123,10 +153,33 @@ class LoginRegisterActivity : AppCompatActivity() {
                 - Squat: 12
                 - Calf raise: 15
      */
-
     private fun registerBtnClicked(){
-        val intent = Intent(applicationContext, MainActivity::class.java)
-        startActivity(intent)
+
+        val fullName = fullNameInput.text.toString()
+        val email = emailAddressInput.text.toString()
+        val password = passwordInput.text.toString()
+        val confirmPassword = confirmPasswordInput.text.toString()
+
+        if (fullName.isBlank() || email.isBlank() || password.isBlank() || confirmPassword.isBlank()){
+            toastMsg("Fullname, email and password should not be blank")
+        } else if (password != confirmPassword){
+            toastMsg("Password don't match")
+        } else {
+
+            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) {
+
+                while (!it.isSuccessful){
+                    loginText.visibility = View.VISIBLE
+                }
+                if (it.isSuccessful) {
+                    toastMsg("Login successful")
+                    val intent = Intent(applicationContext, MainActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    toastMsg("Login in failed")
+                }
+            }
+        }
     }
 
     /*

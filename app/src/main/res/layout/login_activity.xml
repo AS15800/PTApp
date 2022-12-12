@@ -29,14 +29,14 @@
             android:contentDescription="@string/app_name" />
 
         <EditText
-            android:id="@+id/email_input"
+            android:id="@+id/loginEmail_input"
             style="@style/register_input"
             android:inputType="textEmailAddress"
             android:hint="@string/email_input"
             android:autofillHints="Email Address"/>
 
         <EditText
-            android:id="@+id/password_input"
+            android:id="@+id/loginPassword_input"
             style="@style/register_input"
             android:inputType="textPassword"
             android:hint="@string/password_input"
