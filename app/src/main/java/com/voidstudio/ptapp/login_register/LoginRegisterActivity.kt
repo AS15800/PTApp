@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.voidstudio.ptapp.MainActivity
 import com.voidstudio.ptapp.R
@@ -28,6 +30,11 @@ class LoginRegisterActivity : AppCompatActivity() {
     private lateinit var confirmPasswordInput: EditText
 
     private lateinit var loginText: TextView
+
+    private lateinit var db: FirebaseFirestore
+
+    private lateinit var fullName: String
+    private lateinit var email: String
 
     // Create Firebase Authentication object
     private lateinit var auth: FirebaseAuth
@@ -49,6 +56,9 @@ class LoginRegisterActivity : AppCompatActivity() {
         loginText = findViewById(R.id.loginText)
 
         auth = Firebase.auth
+
+        db = Firebase.firestore
+
         // Finding the viewFlipper
         viewFlipper = findViewById(R.id.viewFlipper)
 
@@ -155,8 +165,8 @@ class LoginRegisterActivity : AppCompatActivity() {
      */
     private fun registerBtnClicked(){
 
-        val fullName = fullNameInput.text.toString()
-        val email = emailAddressInput.text.toString()
+        fullName = fullNameInput.text.toString()
+        email = emailAddressInput.text.toString()
         val password = passwordInput.text.toString()
         val confirmPassword = confirmPasswordInput.text.toString()
 
@@ -165,14 +175,11 @@ class LoginRegisterActivity : AppCompatActivity() {
         } else if (password != confirmPassword){
             toastMsg("Password don't match")
         } else {
-
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) {
-
-                while (!it.isSuccessful){
-                    loginText.visibility = View.VISIBLE
-                }
+                loginText.visibility = View.VISIBLE
                 if (it.isSuccessful) {
                     toastMsg("Login successful")
+                    createUserInfo()
                     val intent = Intent(applicationContext, MainActivity::class.java)
                     startActivity(intent)
                 } else {
@@ -180,6 +187,46 @@ class LoginRegisterActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun createUserInfo(){
+
+        val user = hashMapOf(
+            "First" to fullName,
+            "Last" to fullName
+        )
+        /*
+        - User Information
+            - Name
+                - First: Adesh
+                - Last: Sookdewo
+            - Email: adesh5800@hotmail.co.uk
+            - Status: Activated
+            - Date
+                - Joined: 22/11/2022
+                - Expire: 26/12/2022
+        */
+        db.collection(fullName)
+            .document("User Information")
+            .collection("Name")
+            .add(user)
+            .addOnSuccessListener {
+                toastMsg("User Information created")
+            } .addOnFailureListener {
+                toastMsg("User couldn't be created")
+            }
+        val userEmail = hashMapOf(
+            "Email: " to email
+        )
+        db.collection(fullName)
+            .document("User Information")
+            .collection("Email")
+            .add(userEmail)
+            .addOnSuccessListener {
+                toastMsg("User Information created")
+            } .addOnFailureListener {
+                toastMsg("User couldn't be created")
+            }
     }
 
     /*
