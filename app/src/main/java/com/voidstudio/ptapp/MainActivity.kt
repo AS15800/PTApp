@@ -7,14 +7,24 @@ import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.voidstudio.ptapp.login_register.LoginRegisterActivity
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
-    private val workoutInfo = workoutInformationArray()
+    private val workoutInfo = WorkoutInformationArray()
+
+    private val userInformation = UserInformation()
+
+    private val loginActivity = LoginRegisterActivity()
 
     private lateinit var viewFlipper: ViewFlipper
 
-    private lateinit var email: EditText
+    // Firestore variable
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         // Making the screen full and making the status bar transparent
         window.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
         // Finding the viewFlipper
         viewFlipper = findViewById(R.id.viewFlipper)
@@ -58,10 +68,28 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
+    private fun toastMsg(message: String){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
     /*
     TODO: Get workout information
     Get all workout information and store in data structure - Multi-dimensional arrayList
      */
+
+    private fun getData(){
+        db = Firebase.firestore
+
+        val name = loginActivity.fullName
+
+        db.collection(name)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result){
+                    println("${document.id} => ${document.data}")
+                }
+            }
+    }
 
     private fun prepareItems(){
 

@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="110dp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/workout_gradient"
+    android:background="#00FFFFFF"
     tools:ignore="RtlSymmetry"
     android:id="@+id/workoutItem">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pushup"
+        android:text=""
         android:id="@+id/workout_title"
         android:textColor="#FFFFFF"
         android:layout_marginTop="20dp"
@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sets: 5"
+        android:text=""
         android:id="@+id/workout_sets"
         android:layout_below="@+id/workout_title"
         android:layout_marginTop="20dp"
@@ -27,7 +27,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reps: 10"
+        android:text=""
         android:id="@+id/workout_reps"
         android:layout_below="@+id/workout_title"
         android:layout_alignParentEnd="true"

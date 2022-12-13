@@ -75,7 +75,7 @@
 
     <Button
         android:id="@+id/startWorkoutBtn"
-        android:text="Start Workout"
+        android:text="@string/startWorkoutBtn"
         style="@style/workoutBtn"
         android:textColor="#FFFFFF"
         android:layout_height="60dp"/>

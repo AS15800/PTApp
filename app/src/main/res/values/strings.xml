@@ -2,7 +2,8 @@
     <string name="app_name">PTApp</string>
 
     <!-- Register screen -->
-    <string name="name_input">Full name</string>
+    <string name="firstName_input">First name</string>
+    <string name="secondName_input">Second name</string>
     <string name="email_input">Email</string>
     <string name="password_input">Password</string>
     <string name="confirmPassword_input">Confirm Password</string>
@@ -17,4 +18,10 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <!-- Action bar text -->
+    <string name="workoutBar">Workout</string>
+
+    <!-- Buttons -->
+    <string name="startWorkoutBtn">Start Workout</string>
 </resources>

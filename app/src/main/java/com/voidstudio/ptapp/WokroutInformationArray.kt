@@ -1,6 +1,6 @@
 package com.voidstudio.ptapp
 
-class workoutInformationArray {
+class WorkoutInformationArray {
     val workoutInfo = arrayListOf(
         arrayListOf("Pushup", "Sets: 5", "Reps: 10"),
         arrayListOf("Situp", "Sets: 4", "Reps: 20"),

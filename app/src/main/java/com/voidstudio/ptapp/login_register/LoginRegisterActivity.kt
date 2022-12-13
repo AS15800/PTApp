@@ -6,6 +6,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import android.widget.ViewFlipper
@@ -18,8 +19,6 @@ import com.google.firebase.ktx.Firebase
 import com.voidstudio.ptapp.MainActivity
 import com.voidstudio.ptapp.R
 import java.time.LocalDateTime
-import java.time.Month
-import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
 
@@ -29,25 +28,26 @@ class LoginRegisterActivity : AppCompatActivity() {
     private lateinit var viewFlipper: ViewFlipper
 
     // Registering screen inputs variable
-    private lateinit var fullNameInput: EditText
+    private lateinit var firstNameInput: EditText
+    private lateinit var secondNameInput: EditText
     private lateinit var emailAddressInput: EditText
     private lateinit var passwordInput: EditText
     private lateinit var confirmPasswordInput: EditText
 
     // "Logging in" Text variable
-    private lateinit var loginText: TextView
+    private lateinit var progressBar: ProgressBar
 
     // Firestore variable
     private lateinit var db: FirebaseFirestore
 
     // String to store user input and send to database
-    private lateinit var fullName: String
-    private lateinit var email: String
+    private lateinit var firstName: String
+    private lateinit var secondName: String
+    lateinit var fullName: String
+    lateinit var email: String
 
     // Create Firebase Authentication object
     private lateinit var auth: FirebaseAuth
-
-    private var expireDate = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,12 +58,13 @@ class LoginRegisterActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
-        fullNameInput = findViewById(R.id.fullName_input)
+        firstNameInput = findViewById(R.id.firstName_input)
+        secondNameInput = findViewById(R.id.secondName_input)
         emailAddressInput = findViewById(R.id.email_input)
         passwordInput = findViewById(R.id.password_input)
         confirmPasswordInput = findViewById(R.id.confirmPassword_input)
 
-        loginText = findViewById(R.id.loginText)
+        progressBar = findViewById(R.id.progressBar)
 
         auth = Firebase.auth
 
@@ -96,18 +97,6 @@ class LoginRegisterActivity : AppCompatActivity() {
         goToLoginScreen.setOnClickListener {
             viewFlipper.displayedChild = 0
         }
-
-        val expireMonth = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("MM")
-        expireDate = expireMonth.format(formatter).toInt()
-
-        if (expireDate == 12){
-            expireDate = 1
-        } else {
-            expireDate += 1
-        }
-
-        toastMsg(expireDate.toString())
     }
 
     private fun toastMsg(message: String){
@@ -185,13 +174,15 @@ class LoginRegisterActivity : AppCompatActivity() {
      */
     private fun registerBtnClicked(){
         // Getting user input and converting to string
-        fullName = fullNameInput.text.toString()
+        firstName = firstNameInput.text.toString()
+        secondName = secondNameInput.text.toString()
+        //fullName = "$firstName $secondName"
         email = emailAddressInput.text.toString()
         val password = passwordInput.text.toString()
         val confirmPassword = confirmPasswordInput.text.toString()
 
         // Checking if the inputs are blank
-        if (fullName.isBlank() || email.isBlank() || password.isBlank() || confirmPassword.isBlank()){
+        if (firstName.isBlank() || email.isBlank() || password.isBlank() || confirmPassword.isBlank()){
             toastMsg("Fullname, email and password should not be blank")
         }
         // If the user's password matches with confirm password
@@ -200,19 +191,17 @@ class LoginRegisterActivity : AppCompatActivity() {
         }
         // Create user in authentication
         else {
+            progressBar.visibility = View.VISIBLE
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) {
-                while(!it.isSuccessful){
-                    loginText.visibility = View.VISIBLE
-                }
                 if (it.isSuccessful) {
                     toastMsg("Login successful")
                     createUserInfo()
-                    loginText.visibility = View.GONE
+                    progressBar.visibility = View.GONE
                     val intent = Intent(applicationContext, MainActivity::class.java)
                     startActivity(intent)
                 } else {
                     toastMsg("Login in failed")
-                    loginText.visibility = View.GONE
+                    progressBar.visibility = View.GONE
                 }
             }
         }
@@ -223,20 +212,38 @@ class LoginRegisterActivity : AppCompatActivity() {
         val current = LocalDateTime.now()
 
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        val todayDate = current.format(formatter)
+        val todayDate = current.format(formatter).toString()
+
+        val expireMonth = LocalDateTime.now()
+        val expireFormatter = DateTimeFormatter.ofPattern("MM")
+        var expireDate = expireMonth.format(expireFormatter).toInt()
+
+        if (expireDate == 12){
+            expireDate = 1
+        } else {
+            expireDate += 1
+        }
+
+        val dataExpireDate = expireDate.toString()
 
         val userInfo = hashMapOf(
-            "First" to fullName,
-            "Last" to fullName,
+            "First" to firstName,
+            "Last" to secondName,
             "Email" to email,
             "Status" to "Not Active",
             "Date Joined" to todayDate,
-            "Date Expire" to expireDate
+            "Date Expire" to dataExpireDate
         )
-        db.collection(fullName)
+        db.collection(firstName)
             .document("User Information")
             .collection("User Information")
             .add(userInfo)
+            .addOnSuccessListener {
+                toastMsg("All data added well")
+            }
+            .addOnFailureListener {
+                toastMsg("Error")
+            }
     }
 
     /*
